@@ -6,14 +6,14 @@ import java.math.BigDecimal;
 
 class Geometry {
     static double areaOfCircle(BigDecimal radius) {
-        throw new NoCodeWrittenException();
+        return Math.PI * (Math.pow(radius.doubleValue(), 2));
     }
 
     static double areaOfRectangle(BigDecimal length, BigDecimal width) {
-        throw new NoCodeWrittenException();
+        return length.doubleValue() * width.doubleValue();
     }
 
     static double areaOfTriangle(BigDecimal base, BigDecimal h) {
-        throw new NoCodeWrittenException();
+        return base.doubleValue() * h.doubleValue() * 0.5;
     }
 }

@@ -2,9 +2,9 @@ package io.codelex.arithmetic.practice;
 
 public class SumAverageRunningInt {
     public static void main(String[] args) {
-        int sum = 0,
-                lowerBound = 1,
-                upperBound = 100;
+        int sum = 0;
+        int lowerBound = 1;
+        int upperBound = 100;
         float average;
 
         for (int number = lowerBound; number <= upperBound; ++number) {

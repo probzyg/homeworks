@@ -14,11 +14,11 @@ public class SpeedCalculator {
         System.out.printf("Input seconds: ");
         float seconds = scanner.nextFloat();
 
-        float allSeconds = seconds + (minutes * 60) + (hours * 3600),
-                allHours = hours + (minutes / 60) + (seconds / 3600),
-                speedMS = distanceInMeters / allSeconds,
-                speedKmH = (distanceInMeters / 1000) / allHours,
-                speedMH = (distanceInMeters / 1609) / allHours;
+        float allSeconds = seconds + (minutes * 60) + (hours * 3600);
+        float allHours = hours + (minutes / 60) + (seconds / 3600);
+        float speedMS = distanceInMeters / allSeconds;
+        float speedKmH = (distanceInMeters / 1000) / allHours;
+        float speedMH = (distanceInMeters / 1609) / allHours;
 
         System.out.println("Calculated speed: ");
         System.out.println("Your speed in meters/second is " + speedMS);

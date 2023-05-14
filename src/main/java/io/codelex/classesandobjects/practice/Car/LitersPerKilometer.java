@@ -26,7 +26,7 @@ class LitersPerKilometer {
             System.out.printf("Kilometers per liter are %.2f\n", car.calculateConsumption());
 
             if (car.gasHog()) {
-                System.out.println(("Your car is a gas hog!");
+                System.out.println(("Your car is a gas hog!"));
             } else if (car.economyCar()) {
                 System.out.println("Your car is an economy car!");
             }

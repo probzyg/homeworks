@@ -11,16 +11,19 @@ public class Exercise4 {
             System.out.println("Be sure to enter a number.");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Enter number as first parameter.");
-        } /* todo -
+        }
          catch (NonPositiveNumberException e) {
         System.out.println("Result will be imaginary number.");
         }
-        */
+
     }
 
-    static double getInput(String s) {
+    static double getInput(String s) throws NonPositiveNumberException {
         double d = new Double(s).doubleValue();
         // Throw an NonPositiveNumberException if d is less than 0
+        if (d < 0) {
+            throw new NonPositiveNumberException("Result will be an imaginary number");
+        }
         return d;
     }
 }

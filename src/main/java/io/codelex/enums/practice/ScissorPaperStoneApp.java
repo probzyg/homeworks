@@ -5,90 +5,75 @@ import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class ScissorPaperStoneApp {
+    private static double winPC = 0;
+    private static double winI = 0;
     public static void main(String[] args) {
         System.out.println("Let us begin...");
         boolean game = true;
-        int trials = 0;
-        int winPC = 0;
-        int winI = 0;
+        double trials = 0;
+
         DecimalFormat decimalFormat = new DecimalFormat("0.00%");
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
 
         while (game) {
             System.out.println("Scissor-Paper-Stone");
-            Random random = new Random();
-            int randomOrdinal = random.nextInt(3);
 
-            Scanner scanner = new Scanner(System.in);
-            ScissorPaperStone turn = null;
+            ScissorPaperStone myTurn = null;
+            ScissorPaperStone pcTurn = ScissorPaperStone.values()[random.nextInt(3)];
             System.out.print("Your turn (Enter s for scissor, p for paper, t for stone, q to quit): ");
             String value = scanner.nextLine();
-
                 switch (value) {
-                    case "s" -> turn = ScissorPaperStone.SCISSOR;
-                    case "p" -> turn = ScissorPaperStone.PAPER;
-                    case "t" -> turn = ScissorPaperStone.STONE;
+                    case "s" -> myTurn = ScissorPaperStone.SCISSOR;
+                    case "p" -> myTurn = ScissorPaperStone.PAPER;
+                    case "t" -> myTurn = ScissorPaperStone.STONE;
                     case "q" -> {
                         game = false;
-                        double winPCPercent = (double) winPC / (double) trials;
-                        double winIPercent = (double) winI / (double) trials;
+                        double winPCPercent =  winPC / trials;
+                        double winIPercent = winI / trials;
                         String formattedWinPCPercent = decimalFormat.format(winPCPercent);
                         String formattedWinIPercent = decimalFormat.format(winIPercent);
 
                         System.out.println();
                         System.out.println("Number of trials: " + trials);
-                        System.out.printf("I won %d(%s). You won %d(%s).", winI, formattedWinIPercent, winPC, formattedWinPCPercent);
+                        System.out.printf("I won %.0f(%s). You won %.0f(%s).", winI, formattedWinIPercent, winPC, formattedWinPCPercent);
                         System.out.println();
                         System.out.println("Bye!");
                     }
                     default -> System.out.println("Invalid input, try again...");
                 }
 
-            if (turn != null) {
-                System.out.println("My turn: " + turn);
+            if (myTurn != null) {
+                System.out.println("My turn: " + myTurn);
+                if (pcTurn == myTurn) {
+                    System.out.println("Tie!");
+                } else {
+                    String winner = winner(myTurn, pcTurn);
+                    System.out.println(winner);
+                }
             }
-
-
-            if (randomOrdinal == 0 && value.equals("s")) {
-                System.out.println("Tie!");
-            }
-            if (randomOrdinal == 1 && value.equals("p")) {
-                System.out.println("Tie!");
-            }
-            if (randomOrdinal == 2 && value.equals("t")) {
-                System.out.println("Tie!");
-            }
-
-
-            if (randomOrdinal == 0 && value.equals("p")) {
-                System.out.println("You won!");
-                winPC++;
-            }
-            if (randomOrdinal == 1 && value.equals("t")) {
-                System.out.println("You won!");
-                winPC++;
-            }
-            if (randomOrdinal == 2 && value.equals("s")) {
-                System.out.println("You won!");
-                winPC++;
-            }
-
-
-            if (randomOrdinal == 0 && value.equals("t")) {
-                System.out.println("Stone breaks scissor, I won!");
-                winI++;
-            }
-            if (randomOrdinal == 1 && value.equals("s")) {
-                System.out.println("Scissor cuts paper, I won!");
-                winI++;
-            }
-            if (randomOrdinal == 2 && value.equals("p")) {
-                System.out.println("Paper wraps stone, I won!");
-                winI++;
-            }
-
             trials++;
             System.out.println();
+        }
+    }
+
+
+    private static String winner(ScissorPaperStone player, ScissorPaperStone computer) {
+        if (player == ScissorPaperStone.SCISSOR && computer == ScissorPaperStone.PAPER) {
+            winI++;
+            return "You won!";
+        } else if (player == ScissorPaperStone.PAPER && computer == ScissorPaperStone.STONE) {
+            winI++;
+            return "You won!";
+        } else if (player == ScissorPaperStone.STONE && computer == ScissorPaperStone.SCISSOR) {
+            winI++;
+            return "You won!";
+        } else if (player == computer) {
+            return "Tie!";
+        } else {
+            winPC++;
+            return "I won!";
         }
     }
 }

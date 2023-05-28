@@ -20,7 +20,7 @@ public class FlightPlanner {
         Files.readAllLines(path, charset);
         List<String> routesList = new ArrayList<>(Files.readAllLines(path, charset));
         Map<String, List<String>> routeHashMap = new HashMap<>();
-        List<String> cities = new ArrayList<>();
+        List<String> cities = new ArrayList<>(); 
 
         for (String route : routesList) {
             String[] parts = route.split("->");

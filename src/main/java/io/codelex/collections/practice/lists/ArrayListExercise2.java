@@ -6,7 +6,6 @@ import java.util.List;
 @SuppressWarnings("Duplicates")
 public class ArrayListExercise2 {
 
-    //TODO: Write a Java program to iterate through all elements in a array list.
     public static void main(String[] args) {
         List<String> colors = new ArrayList<>();
         colors.add("Red");
@@ -15,11 +14,10 @@ public class ArrayListExercise2 {
         colors.add("White");
         colors.add("Black");
 
-        /*
-        fixme
-        for (...) {
+
+        for (String element : colors) {
           System.out.println(element);
         }
-        */
+
     }
 }

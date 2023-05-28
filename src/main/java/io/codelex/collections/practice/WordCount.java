@@ -13,6 +13,34 @@ public class WordCount {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         final Path path = Paths.get(Histogram.class.getResource(file).toURI());
-        Files.readAllLines(path, charset);
+        int lines = 0;
+        int words = 0;
+        int chars = 0;
+
+        for (String line : Files.readAllLines(path, charset)) {
+            lines++;
+            chars += line.length();
+
+            String[] wordsArray = line.split(" ");
+
+            for (String word : wordsArray) {
+                if (isWord(word)) {
+                    words++;
+                }
+            }
+        }
+
+        System.out.println("Lines = " + lines);
+        System.out.println("Words = " + words);
+        System.out.println("Chars = " + chars);
+    }
+
+    private static boolean isWord(String word) {
+        for (char el : word.toCharArray()) {
+            if (Character.isLetterOrDigit(el)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

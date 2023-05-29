@@ -15,17 +15,33 @@ public class Histogram {
     private static final Charset charset = Charset.defaultCharset();
     private static final String file = "/collections/midtermscores.txt";
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) throws URISyntaxException, IOException {
         final String scores = fileContent();
         List<String> listOfScores = new ArrayList<>(List.of(scores.split(" ")));
+        int[] scoreRanges = getRanges(listOfScores);
+        printHistogram(scoreRanges);
+    }
+
+    private static String fileContent() throws URISyntaxException, IOException {
+        final Path path = Paths.get(Histogram.class.getResource(file).toURI());
+        return Files.readAllLines(path, charset).stream()
+                .findFirst()
+                .orElseThrow(IllegalStateException::new);
+    }
+
+    private static int[] getRanges(List<String> scores) {
         int[] scoreRanges = new int[11];
 
-        for (String el : listOfScores) {
+        for (String el : scores) {
             int value = Integer.parseInt(el);
             int indexOfRange = value / 10;
             scoreRanges[indexOfRange]++;
         }
 
+        return scoreRanges;
+    }
+
+    private static void printHistogram(int[] scoreRanges) {
         for (int i = 0; i < scoreRanges.length; i++) {
             int rangeStart = i*10;
             int rangeEnd = i*10+9;
@@ -39,12 +55,5 @@ public class Histogram {
                 System.out.println(rangeStart + ": " + bar);
             }
         }
-    }
-
-    private static String fileContent() throws URISyntaxException, IOException {
-        final Path path = Paths.get(Histogram.class.getResource(file).toURI());
-        return Files.readAllLines(path, charset).stream()
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
     }
 }

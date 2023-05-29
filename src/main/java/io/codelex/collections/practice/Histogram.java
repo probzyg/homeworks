@@ -6,6 +6,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Histogram {
     private static final Charset charset = Charset.defaultCharset();
@@ -13,7 +17,28 @@ public class Histogram {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         final String scores = fileContent();
-        System.out.println(scores);
+        List<String> listOfScores = new ArrayList<>(List.of(scores.split(" ")));
+        int[] scoreRanges = new int[11];
+
+        for (String el : listOfScores) {
+            int value = Integer.parseInt(el);
+            int indexOfRange = value / 10;
+            scoreRanges[indexOfRange]++;
+        }
+
+        for (int i = 0; i < scoreRanges.length; i++) {
+            int rangeStart = i*10;
+            int rangeEnd = i*10+9;
+
+            StringBuilder bar = new StringBuilder();
+            bar.append("*".repeat(Math.max(0, scoreRanges[i])));
+            if (i < 10) {
+                System.out.println(rangeStart + "-" + rangeEnd + ": " + bar);
+            }
+            else {
+                System.out.println(rangeStart + ": " + bar);
+            }
+        }
     }
 
     private static String fileContent() throws URISyntaxException, IOException {

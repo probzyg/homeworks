@@ -1,6 +1,6 @@
-package io.codelex.classesandobjects.practice;
+package io.codelex.classesandobjects.practice.account;
 
-public class accountTest {
+public class AccountTest {
     public static void main(String[] args) {
         Account A = new Account("A", 100.00);
         Account B = new Account("B", 0);

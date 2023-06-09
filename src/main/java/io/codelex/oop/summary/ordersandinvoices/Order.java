@@ -1,5 +1,6 @@
 package io.codelex.oop.summary.ordersandinvoices;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,13 @@ public class Order {
     }
 
     public void addItem(Item item) {
+        if (item instanceof FoodItem foodItem) {
+            LocalDate expirationDate = foodItem.getDateOfExpiration();
+            LocalDate today = LocalDate.now();
+            if (expirationDate.isBefore(today)) {
+                throw new BadFoodException("Cannot add food item with expiration date in the past");
+            }
+        }
         items.add(item);
     }
 
@@ -26,6 +34,11 @@ public class Order {
             }
         }
         return sb.toString();
+    }
+    public class BadFoodException extends RuntimeException {
+        public BadFoodException(String message) {
+            super(message);
+        }
     }
 
 }

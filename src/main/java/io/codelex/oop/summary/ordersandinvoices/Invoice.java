@@ -10,7 +10,10 @@ public class Invoice {
     private double priceWithoutVAT;
     private double priceWithVAT;
 
-    public Invoice(Order order, String invoiceNumber) {
+    public Invoice(Order order, String invoiceNumber) throws WrongOrderException {
+        if (order.getListOfItems().isEmpty()) {
+            throw new WrongOrderException("Cannot create an invoice with an empty order.");
+        }
         this.items = new ArrayList<>(order.getListOfItems());
         this.invoiceNumber = Integer.parseInt(invoiceNumber);
         this.status = InvoiceStatus.APPROVED;
@@ -53,5 +56,10 @@ public class Invoice {
 
         return sb.toString();
     }
-
+    class WrongOrderException extends Throwable {
+        public WrongOrderException(String s) {
+            super(s);
+        }
+    }
 }
+

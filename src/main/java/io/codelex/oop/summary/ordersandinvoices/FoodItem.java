@@ -10,6 +10,10 @@ public class FoodItem extends AbstractItem{
         this.dateOfExpiration = dateOfExpiration;
     }
 
+    public LocalDate getDateOfExpiration() {
+        return dateOfExpiration;
+    }
+
     @Override
     public String fullInfo() {
         return getName() + ", " + getPrice() + " EUR, best before: " + dateOfExpiration;

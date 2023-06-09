@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<Item> items;
+    private List<SellableThing> items;
 
     public Order() {
         items = new ArrayList<>();
     }
 
-    public void addItem(Item item) {
+    public void addItem(SellableThing item) {
         if (item instanceof FoodItem foodItem) {
             LocalDate expirationDate = foodItem.getDateOfExpiration();
             LocalDate today = LocalDate.now();
@@ -22,7 +22,7 @@ public class Order {
         items.add(item);
     }
 
-    public List<Item> getListOfItems() {
+    public List<SellableThing> getListOfItems() {
         return items;
     }
     public String getTextListOfItems() {

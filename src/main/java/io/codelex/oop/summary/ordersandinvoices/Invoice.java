@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Invoice {
-    private List<Item> items;
+    private List<SellableThing> items;
     private int invoiceNumber;
     private InvoiceStatus status;
     private double priceWithoutVAT;
@@ -26,7 +26,7 @@ public class Invoice {
     }
 
     private double calculateWithoutVAT() {
-        return items.stream().mapToDouble(Item::getPrice).sum();
+        return items.stream().mapToDouble(SellableThing::getPrice).sum();
     }
     private double calculateVAT() {
         return (calculateWithoutVAT() * 0.21);
@@ -44,7 +44,7 @@ public class Invoice {
         sb.append(String.format("= STATUS: %s%n", status));
 
         int itemNumber = 1;
-        for (Item item : items) {
+        for (SellableThing item : items) {
             sb.append(String.format("= %d. %s%n", itemNumber, item.fullInfo()));
             itemNumber++;
         }

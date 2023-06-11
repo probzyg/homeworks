@@ -9,6 +9,7 @@ public class Invoice {
     private InvoiceStatus status;
     private double priceWithoutVAT;
     private double priceWithVAT;
+    private final int width = 60;
 
     public Invoice(Order order, String invoiceNumber) throws WrongOrderException {
         if (order.getListOfItems().isEmpty()) {
@@ -39,27 +40,35 @@ public class Invoice {
 
     public String formattedInvoice() {
         StringBuilder sb = new StringBuilder();
-        sb.append("===================================================\n");
-        sb.append(String.format("= INVOICE NUMBER: %s%n", invoiceNumber));
-        sb.append(String.format("= STATUS: %s%n", status));
+
+        sb.append("=".repeat(width)).append("\n");
+
+        sb.append(format("INVOICE NUMBER: ", String.valueOf(invoiceNumber)));
+
+        sb.append(format("STATUS: ", String.valueOf(status)));
 
         int itemNumber = 1;
         for (SellableThing item : items) {
-            sb.append(String.format("= %d. %s%n", itemNumber, item.fullInfo()));
+                    sb.append(format(String.valueOf(itemNumber) + ". ", item.fullInfo()));
             itemNumber++;
         }
 
-        sb.append(String.format("= SUM: %.2f EUR%n", priceWithoutVAT));
-        sb.append(String.format("= VAT (21%%): %.2f EUR%n", calculateVAT()));
-        sb.append(String.format("= TOTAL: %.2f EUR%n", priceWithVAT));
-        sb.append("===================================================\n");
+        sb.append(format("SUM: ", String.format("%.2f EUR", priceWithoutVAT)));
+        sb.append(format("VAT (21%): ", String.format("%.2f EUR", calculateVAT())));
+        sb.append(format("TOTAL: ", String.format("%.2f EUR", priceWithoutVAT)));
+        sb.append("=".repeat(width)).append("\n");
 
         return sb.toString();
     }
-    class WrongOrderException extends Throwable {
+    static class WrongOrderException extends Throwable {
         public WrongOrderException(String s) {
             super(s);
         }
     }
+
+    private String format(String text, String value) {
+        return "= " + text + value + " ".repeat(width - text.length() - value.length() - 3) + "=\n";
+    }
 }
+
 

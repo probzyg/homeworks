@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Exercise4 {
     public static void main(String[] args) throws IOException {
-        String file = "/C:/Users/kavec/Documents/java/homeworks/src/main/resources/collections/lear.txt"; //
+        String file = new File("src/main/resources/collections/lear.txt").getAbsolutePath(); //
         StringBuilder content = new StringBuilder();
         String reversed;
 

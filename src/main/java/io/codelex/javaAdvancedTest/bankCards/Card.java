@@ -1,23 +1,25 @@
 package io.codelex.javaAdvancedTest.bankCards;
 
+import java.math.BigDecimal;
+
 public abstract class Card {
     private String cardNumber;
     private String ownerFullName;
     private String CCV;
-    private double balance;
+    private BigDecimal balance;
 
-    public Card(String cardNumber, String ownerFullName, String CCV, double balance) {
+    public Card(String cardNumber, String ownerFullName, String CCV, BigDecimal balance) {
         this.cardNumber = cardNumber;
         this.ownerFullName = ownerFullName;
         this.CCV = CCV;
         this.balance = balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
@@ -33,6 +35,6 @@ public abstract class Card {
         return CCV;
     }
 
-    public abstract void takeMoney(double amount) throws NotEnoughFundsException;
-    public abstract void addMoney(double amount);
+    public abstract void takeMoney(BigDecimal amount) throws NotEnoughFundsException;
+    public abstract void addMoney(BigDecimal amount);
 }

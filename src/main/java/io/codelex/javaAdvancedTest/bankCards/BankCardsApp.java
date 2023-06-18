@@ -1,23 +1,25 @@
 package io.codelex.javaAdvancedTest.bankCards;
 
+import java.math.BigDecimal;
+
 public class BankCardsApp {
     public static void main(String[] args) throws NotEnoughFundsException {
-        CreditCard cc = new CreditCard("1234567891234567", "John Lennon", "183", 1234.56);
-        DebitCard dc = new DebitCard("5573672008830244", "Janis Kaveckis", "164", 2043.50);
+        CreditCard cc = new CreditCard("1234567891234567", "John Lennon", "183", BigDecimal.valueOf(1234.56));
+        DebitCard dc = new DebitCard("5573672008830244", "Janis Kaveckis", "164", BigDecimal.valueOf(2043.50));
 
         System.out.println("Credit card:");
         System.out.println(cc.getBalance());
-        cc.addMoney(100);
+        cc.addMoney(BigDecimal.valueOf(100));
         System.out.println(cc.getBalance());
-        cc.takeMoney(1300);
+        cc.takeMoney(BigDecimal.valueOf(1300));
         System.out.println(cc.getBalance());
         System.out.println();
 
         System.out.println("Debit card");
         System.out.println(dc.getBalance());
-        dc.addMoney(8000);
+        dc.addMoney(BigDecimal.valueOf(8000));
         System.out.println(dc.getBalance());
-        dc.takeMoney(100);
+        dc.takeMoney(BigDecimal.valueOf(100));
         System.out.println(dc.getBalance());
     }
 }

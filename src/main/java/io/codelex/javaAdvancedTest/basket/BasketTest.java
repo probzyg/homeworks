@@ -8,27 +8,28 @@ public class BasketTest {
     Basket<Mushroom> mushroomBasket = new Basket<>();
     @Test
     public void testCreateAndAddOrRemoveAppleBasket() throws BasketFullException, BasketEmptyException {
-        Apple apple = new Apple();
+        Apple apple1 = new Apple();
+        Apple apple2 = new Apple();
+        Apple apple3 = new Apple();
 
-        appleBasket.addToBasket(apple);
-        appleBasket.addToBasket(apple);
-        appleBasket.addToBasket(apple);
+        appleBasket.addToBasket(apple1);
+        appleBasket.addToBasket(apple2);
+        appleBasket.addToBasket(apple3);
         assertEquals(3, appleBasket.getCurrentItems());
 
-        appleBasket.removeFromBasket(apple);
+        appleBasket.removeFromBasket(apple2);
         assertEquals(2, appleBasket.getCurrentItems());
     }
 
     @Test
     public void testExceptionsAppleBasket() throws BasketFullException{
         Apple apple = new Apple();
+
         assertThrows(BasketEmptyException.class, () -> appleBasket.removeFromBasket(apple));
 
         for (int i = 0; i < 10; i++) {
-            Apple apple1 = new Apple();
-            appleBasket.addToBasket(apple1);
+            appleBasket.addToBasket(apple);
         }
-
 
         assertThrows(BasketFullException.class, () -> appleBasket.addToBasket(apple));
     }

@@ -1,26 +1,25 @@
 package io.codelex.javaAdvancedTest.bankCards;
 
+import java.math.BigDecimal;
+
 public class DebitCard extends Card{
-    private double refreshedBalance;
-    public DebitCard(String cardNumber, String ownerFullName, String CCV, double balance) {
+    public DebitCard(String cardNumber, String ownerFullName, String CCV, BigDecimal balance) {
         super(cardNumber, ownerFullName, CCV, balance);
     }
 
     @Override
-    public void takeMoney(double amount) throws NotEnoughFundsException {
-        refreshedBalance = getBalance() - amount;
-        if (refreshedBalance < 0) {
+    public void takeMoney(BigDecimal amount) throws NotEnoughFundsException {
+        if (getBalance().subtract(amount).compareTo(BigDecimal.ZERO) < 0) {
             throw new NotEnoughFundsException("Not enough funds on the debit card");
         }
-        setBalance(refreshedBalance);
+        setBalance(getBalance().subtract(amount));
     }
 
     @Override
-    public void addMoney(double amount) {
-        refreshedBalance = getBalance() + amount;
-        if (refreshedBalance > 10000) {
+    public void addMoney(BigDecimal amount) {
+        if (getBalance().add(amount).compareTo(BigDecimal.valueOf(10000)) > 0) {
             System.out.println("Warning: Too much money");
         }
-        setBalance(refreshedBalance);
+        setBalance(getBalance().add(amount));
     }
 }

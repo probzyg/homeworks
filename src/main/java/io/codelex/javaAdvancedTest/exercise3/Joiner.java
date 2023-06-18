@@ -1,5 +1,7 @@
 package io.codelex.javaAdvancedTest.exercise3;
 
+import java.util.StringJoiner;
+
 public class Joiner<T> {
     private String separator;
 
@@ -7,14 +9,15 @@ public class Joiner<T> {
         this.separator = separator;
     }
 
-    public String join(T... el) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < el.length; i++) {
-            result.append(el[i]);
-            if (i < el.length -1) {
-                result.append(separator);
+    public String join(CharSequence delimiter, T... el) {
+        StringJoiner joiner = new StringJoiner(delimiter);
+        for (T element : el) {
+            if (element instanceof Integer | element instanceof Long | element instanceof Short) {
+                joiner.add(String.valueOf(element));
+            } else {
+                joiner.add((CharSequence) element);
             }
         }
-        return result.toString();
+        return joiner.toString();
     }
 }

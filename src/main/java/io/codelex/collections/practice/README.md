@@ -28,7 +28,9 @@ Unique name list contains: Alice Bob
   
 ## Exercise #5
 
-Write a console program that asks user for a number and prints whether a given integer is "happy". An integer is "happy" if repeatedly summing the squares of its digits eventually leads to the number 1.
+Write a console program that asks user for a number and prints whether a 
+given integer is "happy". An integer is "happy" if repeatedly 
+summing the squares of its digits eventually leads to the number 1.
 
 For example, 139 is happy because:
 
